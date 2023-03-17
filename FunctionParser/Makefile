@@ -1,0 +1,24 @@
+all: infix_10 infix_12
+
+infix_10: infix.o number_10.o operation.o
+	gcc infix.o number_10.o operation.o -o infix_10
+
+infix_12: infix.o number_12.o operation.o
+	gcc infix.o number_12.o operation.o -o infix_12
+	
+infix.o: infix.c number.h operation.h
+	gcc -g -Wall -std=c99 -c -o infix.o infix.c
+
+number_10.o: number_10.c number.h operation.h
+	gcc -c -Wall -std=c99 -g number_10.c -o number_10.o
+
+number_12.o: number_12.c number.h operation.h
+	gcc -c -Wall -std=c99 -g number_12.c -o number_12.o
+
+operation.o: operation.c operation.h
+	gcc -g -Wall -std=c99   -c -o operation.o operation.c
+
+clean:
+	rm -f *.o
+	rm -f infix_10 infix_12
+	rm -f output.txt
